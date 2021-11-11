@@ -22,7 +22,7 @@
             @if(\Illuminate\Support\Facades\Auth::id())
                 @if($job->user_favorites_count > 0)
                     <div class="request2" data-id="{{$job->id}}">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="16"  height="16"
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
                              fill="currentColor"
                              class="bi bi-star-fill " viewBox="0 0 16 16">
                             <path
@@ -61,7 +61,7 @@
             $.ajax({
                 type: "GET",
                 url: "/destroy",
-                data:{'job_id':$(this).data('id')}
+                data: {'job_id': $(this).data('id')}
             })
         })
     })
