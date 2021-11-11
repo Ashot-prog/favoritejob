@@ -15,20 +15,23 @@ class FavoriteJobController extends BaseController
 {
     use AuthorizesRequests, DispatchesJobs, ValidatesRequests;
 
-    public function store(Request $request){
+    public function store(Request $request)
+    {
 
         $validated = $request->validate([
             'job_id' => 'required',
-            'candidate_id'=>'required'
+            'candidate_id' => 'required'
         ]);
         FavoriteJob::create($validated,);
     }
-    public function destroy(Request $request){
+
+    public function destroy(Request $request)
+    {
         $validated = $request->validate([
             'job_id' => 'required',
         ]);
-        $favorites = FavoriteJob::all()->where("job_id","",$validated["job_id"])->where("candidate_id","",Auth::id());
-        foreach ($favorites as $favorite){
+        $favorites = FavoriteJob::all()->where("job_id", "", $validated["job_id"])->where("candidate_id", "", Auth::id());
+        foreach ($favorites as $favorite) {
             FavoriteJob::destroy($favorite->id);
         }
 
