@@ -11,11 +11,15 @@
     <title>Document</title>
 </head>
 <body>
-<form action="{{asset('registering')}}" method="post">
+<form action="{{asset('registering')}}" method="post" enctype="multipart/form-data">
     @csrf
     <input type="text" name="name" >
     <input type="email" name="email">
     <input type="password" name="password">
+    <div class="form-group">
+        <p>Posters</p>
+        <input type="file" class="form-control" name="posters[]" placeholder="add posters" multiple >
+    </div>
     <button type="submit"> Register</button>
 </form>
 </body>

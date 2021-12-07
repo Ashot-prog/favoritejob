@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use TCG\Voyager\Facades\Voyager;
 
 /*
 |--------------------------------------------------------------------------
@@ -26,3 +27,10 @@ Route::get('/login', function () {
 Route::post('/logining', [\App\Http\Controllers\CandidateController::class, 'login']);
 
 
+
+
+Route::group(['prefix' => 'admin'], function () {
+    Voyager::routes();
+
+    Route::get('/filter',[\App\Http\Controllers\UserController::class,'filter']);
+});

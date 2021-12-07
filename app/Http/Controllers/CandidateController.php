@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Candidate;
+use Illuminate\Database\Eloquent\Model;
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 use Illuminate\Foundation\Bus\DispatchesJobs;
 use Illuminate\Foundation\Validation\ValidatesRequests;
@@ -20,17 +21,25 @@ class CandidateController extends BaseController
     }
 
     public function store(Request $request)
-    {
+    {   dd($request->hasFile('posters'));
+        $input = $request->except('_token','posters');
         $validated = $request->validate([
             'name' => 'required|string',
             'email' => 'required|string|email',
             'password' => 'required|string'
         ]);
-        $candidate = Candidate::create($validated);
-        if ($candidate) {
-            Auth::login($candidate);
-            return redirect(asset('/'));
+        if ($request->hasFile('posters')){
+            $files = $request->file('posters');
+            $image=[];
+
+            foreach ($files as $file){
+                $file_name = rand(1,9999).$file->getClientOriginalName();
+                array_push($image,$file_name);
+                $file->move(public_path().'/images', $file_name);
+            }
+            $input['posters']= json_encode($image);
         }
+        return redirect(asset('/'));
 
     }
 

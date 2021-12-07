@@ -16,6 +16,7 @@ class JobController extends BaseController
 
     public function index()
     {
+        dd($_GET);
         $jobs = Job::withCount(['userFavorites' => function ($query) {
             $query->where('candidates.id', Auth::id());
         }])->get();

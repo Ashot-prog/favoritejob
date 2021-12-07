@@ -8,9 +8,19 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
 
-class User extends Authenticatable
+class User extends \TCG\Voyager\Models\User
 {
     use HasApiTokens, HasFactory, Notifiable;
+
+    const STATUS_ACTIVE = 1;
+    const STATUS_INACTIVE = 2;
+    const STATUS_DELETED = 3;
+
+    const STATUS_NAMES = [
+        self::STATUS_ACTIVE => 'active',
+        self::STATUS_INACTIVE => 'inactive',
+        self::STATUS_DELETED => 'deleted',
+    ];
 
     /**
      * The attributes that are mass assignable.

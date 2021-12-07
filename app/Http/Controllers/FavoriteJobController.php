@@ -18,11 +18,25 @@ class FavoriteJobController extends BaseController
     public function store(Request $request)
     {
 
-        $validated = $request->validate([
+        $request->validate([
             'job_id' => 'required',
-            'candidate_id' => 'required'
         ]);
-        FavoriteJob::create($validated,);
+
+        $data = [
+            'job_id' => $request->get('job_id'),
+            'candidate_id' => Auth::id(),
+        ];
+
+        $favoriteJob = FavoriteJob::where($data)->first();
+
+        if(empty($favoriteJob)) {
+            FavoriteJob::create($data);
+            return response()->json(['action' => 'created', 'status' => 200]);
+        } else {
+            $favoriteJob->delete();
+            return response()->json(['action' => 'delete', 'status' => 200]);
+        }
+
     }
 
     public function destroy(Request $request)
