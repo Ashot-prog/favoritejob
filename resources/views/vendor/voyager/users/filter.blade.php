@@ -19,27 +19,6 @@
         display: block;
     }
 </style>
-<form action="{{asset('admin/filter')}}" style="border: #97999C solid 1px; padding: 0.8%" class="col-md-12">
-    <div class="col-md-4">
-        <label for="status">Status</label>
-        <select name="status" id="status">
-            <option value=""></option>
-            <option value="active">Active</option>
-            <option value="inactive">Inactive</option>
-            <option value="deleted">Deleted</option>
-        </select>
-    </div>
-    <div class="col-md-4">
-        <p style="display: inline-block">created</p>
-        <input type="date" name="created">
-    </div>
-    <div class="col-md-2">
-        <input type="submit" placeholder="Search" name="submit" value="search">
-    </div>
-    <div class="col-md-2">
-        <input type="submit" placeholder="Download" name="submit" value="download">
-    </div>
-</form>
 @foreach($dataTypeContent as $data)
     <tr>
 
@@ -203,4 +182,24 @@
         </td>
     </tr>
 @endforeach
-
+<form action="{{asset('admin/filter')}}" style="border: #97999C solid 1px; padding: 0.8%" class="col-md-12">
+    <div class="col-md-4">
+        <label for="status">Status</label>
+        <select name="status" id="status">
+            <option value=""></option>
+            <option value="active">Active</option>
+            <option value="inactive">Inactive</option>
+            <option value="deleted">Deleted</option>
+        </select>
+    </div>
+    <div class="col-md-4">
+        <p style="display: inline-block">created</p>
+        <input type="date" name="created">
+    </div>
+    <div class="col-md-2">
+        <input type="submit" placeholder="Search" name="submit" value="search">
+    </div>
+    <div class="col-md-2">
+        <input type="submit" placeholder="Download" name="submit" value="download">
+    </div>
+</form>
